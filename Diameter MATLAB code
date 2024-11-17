@@ -1,0 +1,27 @@
+% Parameters
+stoich_ratio = 5.7;         % Stoich9metric ratio
+mass_flow_rate = 0.8;       % Mass flow rate in kg/s
+reaction_time = 4;          % Reaction time in seconds
+rocket_length = 1.5;        % Rocket length in meters
+rho_f = 785;                % Density of isopropyl alcohol in kg/m^3
+rho_ox = 1220;              % Density of nitrous oxide in kg/m^3
+
+% Step 1: Calculate total propellant mass
+total_mass = mass_flow_rate * reaction_time; % Total mass of fuel and oxidizer
+
+% Step 2: Calculate fuel and oxidizer mass
+m_f = total_mass / (1 + stoich_ratio);       % Fuel mass
+m_ox = stoich_ratio * m_f;                  % Oxidizer mass
+
+% Step 3: Calculate volumes
+V_f = m_f / rho_f;                          % Volume of fuel in m^3
+V_ox = m_ox / rho_ox;                       % Volume of oxidizer in m^3
+V_t = V_f + V_ox;                           % Total tank volume in m^3
+
+% Step 4: Calculate tank diameter
+r = sqrt(V_t / (pi * rocket_length));       % Radius of the tank in meters
+d = 2 * r;                                  % Diameter of the tank in meters
+
+% Display results
+fprintf('Total Tank Volume: %.4f m^3\n', V_t);
+fprintf('Tank Diameter: %.4f m\n', d);
